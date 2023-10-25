@@ -34,6 +34,10 @@ public class Bullet : MonoBehaviour
     {
         if (active == true) {
             transform.position += (Vector3.right * xVelocity * Time.deltaTime);
+            if (transform.position.x > pendulum.transform.position.x) {
+                transform.position = new Vector3(pendulum.transform.position.x, transform.position.y, transform.position.z);
+                StickToPendulum();
+            }
         }
     }
     //Detect when contact is made with the pendulum
@@ -47,6 +51,9 @@ public class Bullet : MonoBehaviour
 
     //Attach itself to the pendulum object and destroy this object
     private void StickToPendulum (){
+        if (this.enabled == false) {
+            return;
+        }
         transform.parent = pendulum.transform;
         simulationManager.StartRotation();
         this.enabled = false;
