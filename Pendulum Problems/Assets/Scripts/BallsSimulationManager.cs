@@ -44,14 +44,27 @@ public class BallsSimulationManager : MonoBehaviour
 
     public void StartSimulation() {
         
-        realPendulum.StartRotation();
-        //predictionPendulum.StartRotation();
+        //realPendulum.StartRotation();
+        predictionPendulum.ResetRotation();
+        userPredictionPendulumSpriteRenderer.color = defaultPredictionColor;
         //Start moving the bullet
 
         simulationStartTime = Time.time;
         applyingForce = true;
 
-        float.TryParse(rotationTimeText.text, out rotationTime);
+        rotationTime = 10f;
+        //float.TryParse(rotationTimeText.text, out rotationTime);
+
+        //float.TryParse(rotationTimeText.text, out rotationTime);
+        float.TryParse(appliedForceMagnitude.text, out forceMagnitude);
+        float.TryParse(appliedForceTime.text, out forceTime);
+        float.TryParse(realPendulumInitialVelocity.text, out initialVelocity);
+        initialVelocity *= -1f;
+        //Debug.Log("Rotation Time: " + rotationTime);
+        Invoke("StopSimulation", rotationTime);
+
+        realPendulum.rotationSpeed = initialVelocity;
+        realPendulum.StartRotation();
     }
 
     public void StartRotation() {
@@ -59,13 +72,7 @@ public class BallsSimulationManager : MonoBehaviour
         //CalculateOutputPendulum();
         //SetPlayerPrediction();
 
-        float.TryParse(rotationTimeText.text, out rotationTime);
-        float.TryParse(appliedForceMagnitude.text, out forceMagnitude);
-        float.TryParse(appliedForceTime.text, out forceTime);
-        float.TryParse(realPendulumInitialVelocity.text, out initialVelocity);
-        Debug.Log("Rotation Time: " + rotationTime);
-        Invoke("StopSimulation", rotationTime);
-        realPendulum.StartRotation();
+        
         //predictionPendulum.StartRotation();
     }
 
@@ -93,41 +100,26 @@ public class BallsSimulationManager : MonoBehaviour
         if (currentTime > forceTime) {
             currentTime = forceTime;
             applyingForce = false;
+            //check prediction?
+            SetPlayerPrediction();
+            predictionPendulum.StartRotation();
+
+            Debug.Log("Finished applying force");
         }
 
-        realPendulum.rotationSpeed = 1.79f * initialVelocity + -1f * forceMagnitude * currentTime;
+        realPendulum.rotationSpeed = initialVelocity + -1f * forceMagnitude * currentTime / 1.79f;
 
 
     }
 
 
-    protected void SetBlockKinematics(BlockInputs block) {
-        float setVelocity = 0;
-
-        float.TryParse(block.blockVelocity.text, out setVelocity);
-        
-        block.blockVelocity.text = "" + Mathf.Abs(setVelocity);
-        setVelocity = Mathf.Abs(setVelocity) * block.velocityDirection.GetDirectionMultiplier();
-        
-
-        float setAcceleration = 0;
-        float.TryParse(block.blockAcceleration.text, out setAcceleration);
-        
-        block.blockAcceleration.text = "" + Mathf.Abs(setAcceleration);
-        setAcceleration = Mathf.Abs(setAcceleration) * block.accelerationDirection.GetDirectionMultiplier();
-
-
-        block.affectedBlock.SetVelocityMagnitude(setVelocity);
-        block.affectedBlock.SetAccelerationMagnitude(setAcceleration);
-
-        
-    }
+    
     protected virtual void SetPlayerPrediction() {
         //Set predictionblock
         float predictedRotationalVelocity;
         float.TryParse(predictionPendulumVelocity.text, out predictedRotationalVelocity);
 
-        predictionPendulum.rotationSpeed = predictedRotationalVelocity;
+        predictionPendulum.rotationSpeed = -1f * predictedRotationalVelocity;
 
 
         if (WithinAcceptedRange(predictionPendulum.rotationSpeed, realPendulum.rotationSpeed) == true)
@@ -156,10 +148,11 @@ public class BallsSimulationManager : MonoBehaviour
 
         //Change text to exact values
        
-        predictionPendulumVelocity.text = "" + (realPendulum.rotationSpeed);
+        predictionPendulumVelocity.text = "" + Mathf.Abs(realPendulum.rotationSpeed);
     }
 
     public void SetTimeScale(float timeScale) {
         Time.timeScale = timeScale;
+        Debug.Log("Setting time scale to: " + timeScale);
     }
 }
