@@ -37,6 +37,7 @@ public class SimulationManager : MonoBehaviour
 
     [SerializeField] private float marginOfError = .04f;
 
+    [SerializeField] private TextMeshProUGUI currentTimeScale;
 
     private void Start()
     {
@@ -56,6 +57,7 @@ public class SimulationManager : MonoBehaviour
     }
 
     public void StartRotation() {
+        CancelInvoke("StopSimulation");
         //Start rotating the rotation object
         CalculateOutputPendulum();
         SetPlayerPrediction();
@@ -144,10 +146,12 @@ public class SimulationManager : MonoBehaviour
 
         //Change text to exact values
        
-        predictionPendulumVelocity.text = "" + (realPendulum.rotationSpeed);
+        predictionPendulumVelocity.text = "" + (realPendulum.rotationSpeed).ToString("F3");
     }
 
     public void SetTimeScale(float timeScale) {
-        Time.timeScale = timeScale;
+        Time.timeScale = Mathf.Pow(10, timeScale); // timeScale;
+        Debug.Log("Setting time scale to: " + Mathf.Pow(10, timeScale));
+        currentTimeScale.text = Mathf.Pow(10, timeScale).ToString("F3");
     }
 }

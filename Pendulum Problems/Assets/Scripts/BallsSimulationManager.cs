@@ -23,6 +23,7 @@ public class BallsSimulationManager : MonoBehaviour
 
     [SerializeField] protected SpriteRenderer userPredictionPendulumSpriteRenderer;
 
+    [SerializeField] private TextMeshProUGUI currentTimeScale;
     //public float bulletVelocity;
     //public float predictedAngularVelocity;
     [SerializeField] private TMP_InputField rotationTimeText;
@@ -52,19 +53,22 @@ public class BallsSimulationManager : MonoBehaviour
         simulationStartTime = Time.time;
         applyingForce = true;
 
-        rotationTime = 10f;
+        //rotationTime = 10f;
         //float.TryParse(rotationTimeText.text, out rotationTime);
 
-        //float.TryParse(rotationTimeText.text, out rotationTime);
+        float.TryParse(rotationTimeText.text, out rotationTime);
         float.TryParse(appliedForceMagnitude.text, out forceMagnitude);
         float.TryParse(appliedForceTime.text, out forceTime);
         float.TryParse(realPendulumInitialVelocity.text, out initialVelocity);
         initialVelocity *= -1f;
         //Debug.Log("Rotation Time: " + rotationTime);
+        CancelInvoke("StopSimulation");
         Invoke("StopSimulation", rotationTime);
 
         realPendulum.rotationSpeed = initialVelocity;
         realPendulum.StartRotation();
+
+
     }
 
     public void StartRotation() {
@@ -148,11 +152,12 @@ public class BallsSimulationManager : MonoBehaviour
 
         //Change text to exact values
        
-        predictionPendulumVelocity.text = "" + Mathf.Abs(realPendulum.rotationSpeed);
+        predictionPendulumVelocity.text = "" + Mathf.Abs(realPendulum.rotationSpeed).ToString("F3");
     }
 
     public void SetTimeScale(float timeScale) {
-        Time.timeScale = timeScale;
-        Debug.Log("Setting time scale to: " + timeScale);
+        Time.timeScale = Mathf.Pow(10, timeScale); // timeScale;
+        Debug.Log("Setting time scale to: " + Mathf.Pow(10, timeScale));
+        currentTimeScale.text = Mathf.Pow(10, timeScale).ToString("F3");
     }
 }
