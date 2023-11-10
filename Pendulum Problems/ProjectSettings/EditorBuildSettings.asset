@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SimulationSelector.unity
+    guid: a9d3b85f36649e94da4286984bef7984
+  - enabled: 1
     path: Assets/Scenes/Bullet.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Three Balls.unity
+    guid: 816355ae818453e44b4f12eb8db38652
   m_configObjects: {}

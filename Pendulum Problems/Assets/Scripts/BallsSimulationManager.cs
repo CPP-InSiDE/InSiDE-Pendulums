@@ -57,13 +57,15 @@ public class BallsSimulationManager : MonoBehaviour
         //float.TryParse(rotationTimeText.text, out rotationTime);
 
         float.TryParse(rotationTimeText.text, out rotationTime);
+        rotationTime = Mathf.Max(rotationTime, .1f);
         float.TryParse(appliedForceMagnitude.text, out forceMagnitude);
         float.TryParse(appliedForceTime.text, out forceTime);
+
         float.TryParse(realPendulumInitialVelocity.text, out initialVelocity);
         initialVelocity *= -1f;
         //Debug.Log("Rotation Time: " + rotationTime);
         CancelInvoke("StopSimulation");
-        Invoke("StopSimulation", rotationTime);
+        Invoke("StopSimulation", forceTime + rotationTime);
 
         realPendulum.rotationSpeed = initialVelocity;
         realPendulum.StartRotation();
