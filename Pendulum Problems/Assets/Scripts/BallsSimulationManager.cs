@@ -36,11 +36,15 @@ public class BallsSimulationManager : MonoBehaviour
     private bool applyingForce;
     private float simulationStartTime;
 
+    [SerializeField] private GameObject info;
+
     private void Start()
     {
         applyingForce = false;
         defaultPredictionColor = userPredictionPendulumSpriteRenderer.color;
         Time.timeScale = 1;
+
+        info.SetActive(true);
     }
 
     public void StartSimulation() {
@@ -70,7 +74,7 @@ public class BallsSimulationManager : MonoBehaviour
         realPendulum.rotationSpeed = initialVelocity;
         realPendulum.StartRotation();
 
-
+        info.SetActive(false);
     }
 
     public void StartRotation() {
@@ -97,6 +101,8 @@ public class BallsSimulationManager : MonoBehaviour
        
         realPendulum.StopRotation();
         predictionPendulum.StopRotation();
+
+        info.SetActive(true);
 
     }
 
