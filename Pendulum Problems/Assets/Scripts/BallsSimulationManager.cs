@@ -37,6 +37,9 @@ public class BallsSimulationManager : MonoBehaviour
     private float simulationStartTime;
 
     [SerializeField] private GameObject info;
+    
+    [SerializeField] private Image fillBar;
+    [SerializeField] private TextMeshProUGUI progressText;
 
     private void Start()
     {
@@ -48,13 +51,10 @@ public class BallsSimulationManager : MonoBehaviour
     }
 
     public void StartSimulation() {
-        
+        ResetSimulation();
         //realPendulum.StartRotation();
-        predictionPendulum.ResetRotation();
-        userPredictionPendulumSpriteRenderer.color = defaultPredictionColor;
         //Start moving the bullet
 
-        simulationStartTime = Time.time;
         applyingForce = true;
 
         //rotationTime = 10f;
@@ -75,6 +75,18 @@ public class BallsSimulationManager : MonoBehaviour
         realPendulum.StartRotation();
 
         info.SetActive(false);
+
+        progressText.text = "Applying force...";
+    }
+    public void ResetSimulation()
+    {
+        StopSimulation();
+        predictionPendulum.ResetRotation();
+        realPendulum.ResetRotation();
+        userPredictionPendulumSpriteRenderer.color = defaultPredictionColor;
+        simulationStartTime = Time.time;
+        fillBar.fillAmount = 0;
+        progressText.text = "";
     }
 
     public void StartRotation() {
@@ -101,6 +113,7 @@ public class BallsSimulationManager : MonoBehaviour
        
         realPendulum.StopRotation();
         predictionPendulum.StopRotation();
+        applyingForce = false;
 
         info.SetActive(true);
 
@@ -117,10 +130,14 @@ public class BallsSimulationManager : MonoBehaviour
             predictionPendulum.StartRotation();
 
             Debug.Log("Finished applying force");
+            progressText.text = "Finished applying force.";
         }
 
         realPendulum.rotationSpeed = initialVelocity + -1f * forceMagnitude * currentTime / 1.79f;
-
+        if(fillBar)
+        {
+            fillBar.fillAmount = currentTime/forceTime;
+        }
 
     }
 
@@ -145,7 +162,7 @@ public class BallsSimulationManager : MonoBehaviour
     }
 
     protected bool WithinAcceptedRange(float testedValue, float expectedValue) {
-        if (Mathf.Abs(testedValue - expectedValue) > Mathf.Abs(expectedValue * marginOfError)) {
+        if (Mathf.Abs(testedValue - expectedValue) > Mathf.Abs(marginOfError)) {
             return false;
         }
 

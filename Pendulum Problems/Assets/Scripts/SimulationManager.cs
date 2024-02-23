@@ -46,9 +46,7 @@ public class SimulationManager : MonoBehaviour
     }
 
     public void StartSimulation() {
-        bullet.ResetBullet();
-        realPendulum.ResetRotation();
-        predictionPendulum.ResetRotation();
+        ResetSimulation();
         //Start moving the bullet
 
         float.TryParse(bulletVelocityText.text, out bulletVelocity);
@@ -67,6 +65,14 @@ public class SimulationManager : MonoBehaviour
         Invoke("StopSimulation", rotationTime);
         realPendulum.StartRotation();
         predictionPendulum.StartRotation();
+    }
+
+    public void ResetSimulation()
+    {
+        StopSimulation();
+        bullet.ResetBullet();
+        realPendulum.ResetRotation();
+        predictionPendulum.ResetRotation();
     }
 
     public void StopSimulation() {
@@ -131,7 +137,7 @@ public class SimulationManager : MonoBehaviour
     }
 
     protected bool WithinAcceptedRange(float testedValue, float expectedValue) {
-        if (Mathf.Abs(testedValue - expectedValue) > Mathf.Abs(expectedValue * marginOfError)) {
+        if (Mathf.Abs(testedValue - expectedValue) > Mathf.Abs(marginOfError)) {
             return false;
         }
 

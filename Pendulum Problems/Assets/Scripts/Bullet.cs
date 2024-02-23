@@ -18,6 +18,8 @@ public class Bullet : MonoBehaviour
 
     //Move at a rate
     public void ResetBullet() {
+        transform.parent = null;
+        transform.rotation = Quaternion.identity;
         transform.position = initialPosition;
     }
     public void StartBullet() {
