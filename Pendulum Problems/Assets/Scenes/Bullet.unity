@@ -9880,6 +9880,9 @@ MonoBehaviour:
   rotationTime: 0
   marginOfError: 0.04
   currentTimeScale: {fileID: 2068326790}
+  popupSpot: {fileID: 1963854412}
+  popupSuccess: {fileID: 122294735727377923, guid: ee2090db764fa6a4ba1e35fd64e34568, type: 3}
+  popupFailure: {fileID: 122294735727377923, guid: d8074369b25785842b510c1a3cf72db3, type: 3}
 --- !u!4 &1967719201
 Transform:
   m_ObjectHideFlags: 0
@@ -10059,8 +10062,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -608.7903, y: -550.0858}
-  m_SizeDelta: {x: 1235.581, y: 926.94}
+  m_AnchoredPosition: {x: -608.7903, y: -571.9734}
+  m_SizeDelta: {x: 1235.581, y: 970.715}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2054195118
 MonoBehaviour:
@@ -10659,8 +10662,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -615.329, y: -468.71}
-  m_SizeDelta: {x: 1178.205, y: 893.92}
+  m_AnchoredPosition: {x: -615.329, y: -486.35498}
+  m_SizeDelta: {x: 1178.205, y: 929.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141820482
 MonoBehaviour:
@@ -10682,26 +10685,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are presented with a system of bars connected to disks. Each bar''s
-    end points are labeled either A, B, or C. Your objective is to predict the instantaneous
-    angular velocity of the bar <color=orange><b>BC<color=white></b>, given the angular
-    velocity of the disk.
+  m_text: 'You are presented with a <color=orange>1.5 kg<color=white> pendulum hanging
+    from a <color=orange>540 mm<color=white> long bar. A <color=orange>60 g<color=white>
+    bullet is soon to collide with the bar, <color=orange>180 mm<color=white> from
+    the pendulum. Your job is to predict the angular velocity of the pendulum immediately
+    after impact.
 
 
-    The angular velocity of the disk may be changed in
-    the <color=yellow><b>Inputs<color=white></b> panel to the left.
+    The velocity of the bullet maybe changed in the <color=yellow><b>Inputs<color=white></b>
+    panel to the left.
 
 
-    The <color=#00FFFF><b>Predictions<color=white></b>
-    panel contains your <color=green><b>prediction of BC''s angular velocity.<color=white></b>
-    Your prediction is represented by a <color=green><b>grey ghost bar.<color=white></b>
-    When your prediction matches the instantaneous angular velocity of the actual
-    bar <color=orange><b>BC<color=white></b>, the grey bar will turn green.
+    The <color=#00FFFF><b>Predictions<color=white></b> panel
+    contains your <color=green><b>prediction of the pendulum''s angular velocity.<color=white></b>
+    Your prediction is represented by a <color=green><b>grey ghost pendulum.<color=white></b>
+    When your prediction matches the angular velocity of the pendulum, the pendulum
+    will turn green.
 
 
-    The
-    length of the simulation may be changed in the <color=#FF7F7F><b>Simulation Time<color=white></b>
-    panel to the left.'
+    The length of the simulation may be changed in the <color=#FF7F7F><b>Simulation
+    Runtime<color=white></b> panel to the left. Additionally, you may adjust the
+    <color=purple><b>Simulation speed<color=white></b> slider to slow down the simulation.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

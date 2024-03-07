@@ -2417,8 +2417,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -615.329, y: -468.71}
-  m_SizeDelta: {x: 1178.205, y: 893.92}
+  m_AnchoredPosition: {x: -615.329, y: -540.3501}
+  m_SizeDelta: {x: 1178.205, y: 1037.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &481600346
 MonoBehaviour:
@@ -2440,26 +2440,28 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are presented with a system of bars connected to disks. Each bar''s
-    end points are labeled either A, B, or C. Your objective is to predict the instantaneous
-    angular velocity of the bar <color=orange><b>BC<color=white></b>, given the angular
-    velocity of the disk.
+  m_text: 'You are presented with a system of pendulums connected with bars. This
+    system is given an initial angular velocity. An torque force is applied over
+    time to the system. Your objective is to predict the final angular velocity once
+    the force has finished applying.
 
 
-    The angular velocity of the disk may be changed in
-    the <color=yellow><b>Inputs<color=white></b> panel to the left.
+    The initial angular speed, the added force,
+    and the time over which the force is applied may be changed in the <color=yellow><b>Inputs<color=white></b>
+    panel to the left.
 
 
-    The <color=#00FFFF><b>Predictions<color=white></b>
-    panel contains your <color=green><b>prediction of BC''s angular velocity.<color=white></b>
-    Your prediction is represented by a <color=green><b>grey ghost bar.<color=white></b>
-    When your prediction matches the instantaneous angular velocity of the actual
-    bar <color=orange><b>BC<color=white></b>, the grey bar will turn green.
+    The <color=#00FFFF><b>Predictions<color=white></b> panel
+    contains your <color=green><b>prediction of the pendulums'' finals angular velocity.<color=white></b>
+    Your prediction is represented by  <color=green><b>grey ghost pendulums.<color=white></b>
+    When your prediction matches the  angular velocity of the actual system, the
+    pendulums will turn green.
 
 
-    The
-    length of the simulation may be changed in the <color=#FF7F7F><b>Simulation Time<color=white></b>
-    panel to the left.'
+    The length of the simulation may be changed
+    in the <color=#FF7F7F><b>Simulation Runtime<color=white></b> panel to the left.
+    Additionally, you may adjust the <color=purple><b>Simulation speed<color=white></b>
+    slider to slow down the simulation.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5022,7 +5024,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5627347101927913933}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -5915,7 +5917,7 @@ RectTransform:
   - {fileID: 1370827640}
   - {fileID: 166826951}
   m_Father: {fileID: 5627347101927913933}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -9051,8 +9053,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -608.7903, y: -550.0858}
-  m_SizeDelta: {x: 1235.581, y: 926.94}
+  m_AnchoredPosition: {x: -608.7903, y: -622.91986}
+  m_SizeDelta: {x: 1235.581, y: 1072.608}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672829275
 MonoBehaviour:
@@ -10249,6 +10251,9 @@ MonoBehaviour:
   info: {fileID: 891862717}
   fillBar: {fileID: 1370827641}
   progressText: {fileID: 166826952}
+  popupSpot: {fileID: 1329989393}
+  popupSuccess: {fileID: 122294735727377923, guid: ee2090db764fa6a4ba1e35fd64e34568, type: 3}
+  popupFailure: {fileID: 122294735727377923, guid: d8074369b25785842b510c1a3cf72db3, type: 3}
 --- !u!1 &2005816589
 GameObject:
   m_ObjectHideFlags: 0
@@ -11510,8 +11515,8 @@ RectTransform:
   - {fileID: 5627347102727105738}
   - {fileID: 1180626555}
   - {fileID: 966180405}
-  - {fileID: 1329989393}
   - {fileID: 1607917415}
+  - {fileID: 1329989393}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

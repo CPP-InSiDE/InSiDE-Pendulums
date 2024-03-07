@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Mathematics;
 
 
 [System.Serializable]
@@ -38,6 +39,9 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private float marginOfError = .04f;
 
     [SerializeField] private TextMeshProUGUI currentTimeScale;
+    [SerializeField] private Transform popupSpot;
+    [SerializeField] private GameObject popupSuccess;
+    [SerializeField] private GameObject popupFailure;
 
     private void Start()
     {
@@ -129,10 +133,14 @@ public class SimulationManager : MonoBehaviour
         if (WithinAcceptedRange(predictionPendulum.rotationSpeed, realPendulum.rotationSpeed) == true)
         {
             userPredictionPendulumSpriteRenderer.color = Color.green;
+            ServerManager.main.Attempt(true);
+            Instantiate(popupSuccess, popupSpot.position, popupSpot.rotation, popupSpot);
             SetExactSolution();
         }
         else {
             userPredictionPendulumSpriteRenderer.color = defaultPredictionColor;
+            ServerManager.main.Attempt(false);
+            Instantiate(popupFailure, popupSpot.position, popupSpot.rotation, popupSpot);
         }
     }
 

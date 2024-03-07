@@ -40,6 +40,9 @@ public class BallsSimulationManager : MonoBehaviour
     
     [SerializeField] private Image fillBar;
     [SerializeField] private TextMeshProUGUI progressText;
+    [SerializeField] private Transform popupSpot;
+    [SerializeField] private GameObject popupSuccess;
+    [SerializeField] private GameObject popupFailure;
 
     private void Start()
     {
@@ -154,10 +157,15 @@ public class BallsSimulationManager : MonoBehaviour
         if (WithinAcceptedRange(predictionPendulum.rotationSpeed, realPendulum.rotationSpeed) == true)
         {
             userPredictionPendulumSpriteRenderer.color = Color.green;
+            ServerManager.main.Attempt(true);
+            Instantiate(popupSuccess, popupSpot.position, popupSpot.rotation, popupSpot);
             SetExactSolution();
         }
         else {
             userPredictionPendulumSpriteRenderer.color = defaultPredictionColor;
+            ServerManager.main.Attempt(false);
+            Instantiate(popupFailure, popupSpot.position, popupSpot.rotation, popupSpot);
+            
         }
     }
 
